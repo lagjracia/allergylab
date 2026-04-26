@@ -10,7 +10,7 @@ jobs:
         name: Checkout source
       - name: Build images
         run: |
-          cd part7a
+          cd Part7a
           docker build -t allergylab:latest .
       - name: Run Tests
         run: |
@@ -27,3 +27,6 @@ jobs:
           docker push ${{ secrets.DOCKER_USERNAME }}/al-app:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/al-db-loader:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/al-email:latest
+  deploy:
+    needs: [build]
+    runs-on: ubuntu-latest
